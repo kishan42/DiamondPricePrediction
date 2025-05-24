@@ -4,13 +4,11 @@ import os
 ## Model Training
 from sklearn.linear_model import LinearRegression,Lasso,Ridge,ElasticNet
 from sklearn.tree import DecisionTreeRegressor
-from sklearn.metrics import r2_score,mean_absolute_error,mean_squared_error
+from sklearn.ensemble import RandomForestRegressor
 from src.exception import CustomException
 from src.logger import logging
-
 from src.utils import save_object
 from src.utils import evaluate_model
-
 from dataclasses import dataclass
 import sys
 import os
@@ -36,12 +34,30 @@ class ModelTrainer:
             )
             logging.info("Training model")
             
+            # Models and their respective parameter grids
             models = {
-                "LinearRegression": LinearRegression(),
-                "Lasso": Lasso(),
-                "Ridge": Ridge(),
-                "ElasticNet": ElasticNet(),
-                "DecisionTreeRegressor": DecisionTreeRegressor()
+                'LinearRegression': (LinearRegression(), {}),
+                'Lasso': (Lasso(), {
+                    'alpha': [0.01, 0.1, 1.0]
+                }),
+                'Ridge': (Ridge(), {
+                    'alpha': [0.01, 0.1, 1.0]
+                }),
+                'ElasticNet': (ElasticNet(), {
+                    'alpha': [0.01, 0.1, 1.0],
+                    'l1_ratio': [0.1, 0.5, 0.9]
+                }),
+                'RandomForestRegressor': (RandomForestRegressor(), {
+                    'n_estimators': [100, 200],
+                    'max_depth': [5, 10, None],
+                    'min_samples_split': [2, 5],
+                    'min_samples_leaf': [1, 2]
+                }),
+                'DecisionTreeRegressor': (DecisionTreeRegressor(), {
+                    'max_depth': [5, 10, None],
+                    'min_samples_split': [2, 5, 10],
+                    'min_samples_leaf': [1, 2, 4]
+                })
             }
             
             model_report: dict = evaluate_model(X_train, y_train, X_test, y_test, models)
