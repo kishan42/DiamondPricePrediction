@@ -7,22 +7,40 @@ This project aims to predict diamond prices based on various attributes using ma
 ## 📁 Project Structure
 
 ```
-DiamondPricePrediction/
-├── artifacts/
-├── mlartifacts/
-├── notebooks/
-│   └── eda.ipynb
-├── src/
-│   ├── data_ingestion.py
-│   ├── data_transformation.py
-│   ├── model_trainer.py
-│   └── model_evaluation.py
-├── templates/
-│   └── index.html
-├── application.py
-├── requirements.txt
-├── setup.py
-└── README.md
+Directory structure:
+└── kishan42-diamondpriceprediction/
+    ├── README.md
+    ├── application.py
+    ├── requirements.txt
+    ├── setup.py
+    ├── artifacts/
+    │   ├── data.csv
+    │   ├── model.pkl
+    │   ├── preprocessor.pkl
+    │   ├── test.csv
+    │   └── train.csv
+    ├── notebooks/
+    │   ├── EDA.ipynb
+    │   ├── Model Training.ipynb
+    │   └── data/
+    │       └── gemstone.csv
+    ├── src/
+    │   ├── __init__.py
+    │   ├── exception.py
+    │   ├── logger.py
+    │   ├── utils.py
+    │   ├── components/
+    │   │   ├── __init__.py
+    │   │   ├── data_ingestion.py
+    │   │   ├── data_transformation.py
+    │   │   └── model_trainer.py
+    │   └── pipelines/
+    │       ├── __init__.py
+    │       ├── prediction_pipeline.py
+    │       └── training_pipeline.py
+    └── templates/
+        ├── form.html
+        └── index.html
 ```
 
 ---
